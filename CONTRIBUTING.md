@@ -2,23 +2,30 @@
 
 Thank you for contributing a theme to the massCode community!
 
-## How to Submit a Theme
+## Fastest Way: Submit in 30 Seconds (No Git Required)
 
-1. Fork this repository.
-2. Add your theme JSON file to `themes/<your-theme-id>.json`.
-   - Use **kebab-case** for the filename (`a-z`, `0-9`, `-`), e.g. `tokyo-night.json`.
-   - Reserved IDs (`light`, `dark`, `auto`) are not allowed.
-3. Test your theme locally in massCode by placing it in `~/.massCode/themes/`.
-4. Run validation locally:
+1. In massCode, open **Settings → Appearance** and click **Create Theme Template**.
+2. Edit your theme JSON in `~/.massCode/themes/` (live reload applies changes instantly) and select it in the Theme dropdown.
+3. Click **Submit to Community** — massCode validates your theme and opens a pre-filled file in GitHub Web UI.
+4. Click **Commit changes → Propose changes → Create pull request**.
+
+Prefer submitting manually from the browser? Open the [GitHub Web Theme Editor](https://github.com/massCodeIO/masscode-themes/new/main/themes), enter `<your-theme-id>.json` (kebab-case), paste your JSON, and open a Pull Request.
+
+## Alternative: Local Git Workflow
+
+1. Fork and clone this repository.
+2. Add your theme JSON file to `themes/<your-theme-id>.json` (kebab-case `a-z`, `0-9`, `-`; reserved IDs `light`, `dark`, `auto` are not allowed).
+3. Validate locally:
    ```bash
    node scripts/build-registry.mjs --check
    ```
-5. Open a Pull Request. Do **not** edit `registry.json` — GitHub Actions will automatically regenerate it after merge.
+4. Open a Pull Request. Do **not** edit `registry.json` — GitHub Actions rebuilds it automatically on merge.
 
 ## Theme JSON Format
 
 ```json
 {
+  "$schema": "https://raw.githubusercontent.com/massCodeIO/masscode-themes/main/schema/theme.schema.json",
   "name": "My Theme",
   "author": "your-handle",
   "authorUrl": "https://github.com/your-handle",
@@ -59,6 +66,6 @@ Thank you for contributing a theme to the massCode community!
 ## Validation Rules
 
 - Required fields: `name`, `type` (`"light"` or `"dark"`), `colors` (minimum: `background`, `foreground`, `primary`, `card`, `border`).
-- Optional fields: `author`, `authorUrl` (`https://github.com/...`), `editorColors` (keys must start with `editor-`).
+- Optional fields: `$schema`, `author`, `authorUrl` (`https://github.com/...`), `editorColors` (keys must start with `editor-`).
 - Supported CSS color formats: `#hex`, `rgb(...)`, `rgba(...)`, `hsl(...)`, `hsla(...)`, `oklch(...)`.
 - Legacy `color-*` tokens (such as `color-bg`, `color-primary`) are not allowed.

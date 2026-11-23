@@ -4,9 +4,13 @@ Official community theme registry for [massCode](https://github.com/massCodeIO/m
 
 Browse and install any theme directly inside massCode via **Settings → Appearance → Community Themes**.
 
-## Contributing a Theme
+## Submit Your Theme (No Git Required)
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for the theme format, validation rules, and pull request checklist.
+1. Create and customize your theme in massCode (**Settings → Appearance → Create Theme Template**).
+2. Click **Submit to Community** in **Settings → Appearance**, or open the [GitHub Web Theme Editor](https://github.com/massCodeIO/masscode-themes/new/main/themes) directly.
+3. Click **Commit changes → Create pull request**.
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full schema and validation rules.
 
 ## Registry Format
 
