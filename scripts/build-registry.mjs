@@ -1,14 +1,16 @@
 #!/usr/bin/env node
 import { createHash } from 'node:crypto'
 import { execSync } from 'node:child_process'
-import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readdirSync, readFileSync, unlinkSync, writeFileSync } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT_DIR = path.resolve(__dirname, '..')
 const THEMES_DIR = path.join(ROOT_DIR, 'themes')
+const PREVIEWS_DIR = path.join(ROOT_DIR, 'previews')
 const REGISTRY_PATH = path.join(ROOT_DIR, 'registry.json')
+const README_PATH = path.join(ROOT_DIR, 'README.md')
 
 const RESERVED_THEME_IDS = new Set(['light', 'dark', 'auto'])
 const LEGACY_COLOR_TOKENS = new Set([
@@ -180,6 +182,98 @@ function validateTheme(fileName, rawContent) {
   return { errors: [], entry }
 }
 
+function renderPreviewSvg(entry) {
+  const isLight = entry.type === 'light'
+  const p = entry.preview
+  const bg = p.background
+  const card = p.card
+  const fg = p.foreground
+  const primary = p.primary
+  const border = p.border
+  const accent = p.accent || card
+  const keyword = p.keyword || primary
+  const str = p.string || (isLight ? '#16a34a' : '#4ade80')
+  const comment = p.comment || (isLight ? '#9ca3af' : '#71717a')
+
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="72" viewBox="0 0 180 72" fill="none">
+  <defs>
+    <clipPath id="clip">
+      <rect x="0.5" y="0.5" width="179" height="71" rx="7.5" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="180" height="72" fill="${bg}" />
+    <rect width="60" height="72" fill="${card}" />
+    <line x1="60" y1="0" x2="60" y2="72" stroke="${border}" stroke-width="1" />
+    <!-- Sidebar -->
+    <rect x="10" y="12" width="24" height="5" rx="2.5" fill="${primary}" opacity="0.9" />
+    <rect x="8" y="23" width="44" height="9" rx="3" fill="${accent}" />
+    <rect x="12" y="26" width="28" height="3" rx="1.5" fill="${fg}" />
+    <rect x="10" y="38" width="36" height="3" rx="1.5" fill="${fg}" opacity="0.55" />
+    <rect x="10" y="47" width="28" height="3" rx="1.5" fill="${fg}" opacity="0.4" />
+    <!-- Editor -->
+    <rect x="72" y="16" width="18" height="4" rx="2" fill="${keyword}" />
+    <rect x="94" y="16" width="30" height="4" rx="2" fill="${fg}" />
+    <rect x="128" y="16" width="24" height="4" rx="2" fill="${str}" />
+    <rect x="80" y="27" width="22" height="4" rx="2" fill="${primary}" />
+    <rect x="106" y="27" width="36" height="4" rx="2" fill="${str}" />
+    <rect x="80" y="38" width="44" height="4" rx="2" fill="${comment}" opacity="0.8" />
+    <rect x="72" y="49" width="16" height="4" rx="2" fill="${keyword}" />
+    <rect x="92" y="49" width="28" height="4" rx="2" fill="${fg}" />
+  </g>
+  <rect x="0.5" y="0.5" width="179" height="71" rx="7.5" stroke="${border}" />
+</svg>
+`
+}
+
+function syncPreviews(themes) {
+  mkdirSync(PREVIEWS_DIR, { recursive: true })
+  const expectedFiles = new Set()
+
+  for (const theme of themes) {
+    const fileName = `${theme.id}.svg`
+    expectedFiles.add(fileName)
+    writeFileSync(path.join(PREVIEWS_DIR, fileName), renderPreviewSvg(theme), 'utf8')
+  }
+
+  for (const existing of readdirSync(PREVIEWS_DIR)) {
+    if (existing.endsWith('.svg') && !expectedFiles.has(existing)) {
+      unlinkSync(path.join(PREVIEWS_DIR, existing))
+    }
+  }
+}
+
+function updateReadmeTable(themes) {
+  if (!existsSync(README_PATH)) return
+
+  const readme = readFileSync(README_PATH, 'utf8')
+  const startMarker = '<!-- THEMES:START -->'
+  const endMarker = '<!-- THEMES:END -->'
+  const startIdx = readme.indexOf(startMarker)
+  const endIdx = readme.indexOf(endMarker)
+
+  if (startIdx === -1 || endIdx === -1 || endIdx < startIdx) return
+
+  const rows = themes.map((theme) => {
+    const previewCell = `![${theme.name}](previews/${theme.id}.svg)`
+    const nameCell = `[**${theme.name}**](${theme.file})`
+    const typeCell = theme.type === 'dark' ? 'Dark' : 'Light'
+    const authorCell = theme.author
+      ? (theme.authorUrl ? `[${theme.author}](${theme.authorUrl})` : theme.author)
+      : '—'
+    return `| ${previewCell} | ${nameCell} | ${typeCell} | ${authorCell} |`
+  })
+
+  const table = [
+    '| Preview | Theme | Type | Author |',
+    '| --- | --- | --- | --- |',
+    ...rows,
+  ].join('\n')
+
+  const nextReadme = `${readme.slice(0, startIdx + startMarker.length)}\n${table}\n${readme.slice(endIdx)}`
+  writeFileSync(README_PATH, nextReadme, 'utf8')
+}
+
 function main() {
   const isCheckOnly = process.argv.includes('--check')
   const entries = readdirSync(THEMES_DIR, { withFileTypes: true })
@@ -233,7 +327,9 @@ function main() {
   }
 
   writeFileSync(REGISTRY_PATH, `${JSON.stringify(registry, null, 2)}\n`, 'utf8')
-  console.log(`Generated registry.json with ${themes.length} theme(s) at commit ${registry.commit}.`)
+  syncPreviews(themes)
+  updateReadmeTable(themes)
+  console.log(`Generated registry.json, ${themes.length} SVG preview(s), and README table at commit ${registry.commit}.`)
 }
 
 main()

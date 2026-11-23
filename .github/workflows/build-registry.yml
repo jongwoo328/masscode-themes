@@ -20,18 +20,18 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Build registry.json
+      - name: Build registry.json, SVG previews, and README table
         env:
           REGISTRY_COMMIT_SHA: ${{ github.sha }}
         run: node scripts/build-registry.mjs
-      - name: Commit updated registry.json
+      - name: Commit updated registry artifacts
         run: |
-          if git diff --quiet registry.json; then
-            echo "No changes in registry.json"
+          if git diff --quiet registry.json README.md previews && [ -z "$(git status --porcelain previews)" ]; then
+            echo "No changes in generated artifacts"
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add registry.json
-          git commit -m "chore(registry): rebuild registry.json [skip ci]"
+          git add registry.json README.md previews
+          git commit -m "chore(registry): rebuild registry, previews, and README [skip ci]"
           git push
