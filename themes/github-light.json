@@ -1,0 +1,36 @@
+{
+  "name": "GitHub Light",
+  "author": "massCode",
+  "authorUrl": "https://github.com/massCodeIO",
+  "type": "light",
+  "colors": {
+    "primary": "hsl(212, 92%, 45%)",
+    "primary-foreground": "hsl(0, 0%, 100%)",
+    "background": "hsl(0, 0%, 100%)",
+    "foreground": "hsl(213, 14%, 15%)",
+    "accent": "hsl(210, 29%, 93%)",
+    "accent-hover": "hsl(210, 29%, 96%)",
+    "accent-foreground": "hsl(213, 14%, 15%)",
+    "muted": "hsl(210, 29%, 97%)",
+    "muted-foreground": "hsl(212, 9%, 44%)",
+    "card": "hsl(210, 29%, 97%)",
+    "popover": "hsl(0, 0%, 100%)",
+    "popover-foreground": "hsl(213, 14%, 15%)",
+    "border": "hsl(210, 18%, 87%)",
+    "scrollbar": "hsla(212, 9%, 44%, 0.3)"
+  },
+  "editorColors": {
+    "editor-keyword": "hsl(355, 65%, 48%)",
+    "editor-string": "hsl(212, 84%, 31%)",
+    "editor-comment": "hsl(212, 9%, 46%)",
+    "editor-number": "hsl(212, 92%, 42%)",
+    "editor-atom": "hsl(212, 92%, 42%)",
+    "editor-variable": "hsl(213, 14%, 15%)",
+    "editor-def": "hsl(261, 69%, 52%)",
+    "editor-property": "hsl(212, 92%, 42%)",
+    "editor-tag": "hsl(134, 65%, 28%)",
+    "editor-attribute": "hsl(212, 92%, 42%)",
+    "editor-operator": "hsl(355, 65%, 48%)",
+    "editor-bracket": "hsl(212, 9%, 44%)"
+  }
+}

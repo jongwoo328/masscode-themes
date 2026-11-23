@@ -1,0 +1,36 @@
+{
+  "name": "Dracula",
+  "author": "massCode",
+  "authorUrl": "https://github.com/massCodeIO",
+  "type": "dark",
+  "colors": {
+    "primary": "hsl(265, 89%, 78%)",
+    "primary-foreground": "hsl(231, 15%, 18%)",
+    "background": "hsl(231, 15%, 18%)",
+    "foreground": "hsl(60, 30%, 96%)",
+    "accent": "hsl(232, 14%, 28%)",
+    "accent-hover": "hsl(232, 14%, 33%)",
+    "accent-foreground": "hsl(60, 30%, 96%)",
+    "muted": "hsl(232, 15%, 23%)",
+    "muted-foreground": "hsl(225, 27%, 55%)",
+    "card": "hsl(231, 15%, 21%)",
+    "popover": "hsl(231, 15%, 21%)",
+    "popover-foreground": "hsl(60, 30%, 96%)",
+    "border": "hsl(232, 14%, 31%)",
+    "scrollbar": "hsla(225, 27%, 55%, 0.35)"
+  },
+  "editorColors": {
+    "editor-keyword": "hsl(326, 100%, 74%)",
+    "editor-string": "hsl(65, 92%, 76%)",
+    "editor-comment": "hsl(225, 27%, 51%)",
+    "editor-number": "hsl(265, 89%, 78%)",
+    "editor-atom": "hsl(265, 89%, 78%)",
+    "editor-variable": "hsl(60, 30%, 96%)",
+    "editor-def": "hsl(135, 94%, 65%)",
+    "editor-property": "hsl(191, 97%, 77%)",
+    "editor-tag": "hsl(326, 100%, 74%)",
+    "editor-attribute": "hsl(135, 94%, 65%)",
+    "editor-operator": "hsl(326, 100%, 74%)",
+    "editor-bracket": "hsl(60, 30%, 96%)"
+  }
+}

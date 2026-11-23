@@ -1,0 +1,36 @@
+{
+  "name": "Catppuccin Mocha",
+  "author": "massCode",
+  "authorUrl": "https://github.com/massCodeIO",
+  "type": "dark",
+  "colors": {
+    "primary": "hsl(267, 84%, 81%)",
+    "primary-foreground": "hsl(240, 21%, 15%)",
+    "background": "hsl(240, 21%, 15%)",
+    "foreground": "hsl(226, 64%, 88%)",
+    "accent": "hsl(237, 16%, 23%)",
+    "accent-hover": "hsl(234, 13%, 31%)",
+    "accent-foreground": "hsl(226, 64%, 88%)",
+    "muted": "hsl(240, 21%, 18%)",
+    "muted-foreground": "hsl(228, 24%, 64%)",
+    "card": "hsl(240, 21%, 12%)",
+    "popover": "hsl(240, 21%, 15%)",
+    "popover-foreground": "hsl(226, 64%, 88%)",
+    "border": "hsl(237, 16%, 23%)",
+    "scrollbar": "hsla(228, 24%, 64%, 0.35)"
+  },
+  "editorColors": {
+    "editor-keyword": "hsl(267, 84%, 81%)",
+    "editor-string": "hsl(115, 54%, 76%)",
+    "editor-comment": "hsl(230, 13%, 55%)",
+    "editor-number": "hsl(23, 92%, 75%)",
+    "editor-atom": "hsl(23, 92%, 75%)",
+    "editor-variable": "hsl(226, 64%, 88%)",
+    "editor-def": "hsl(217, 92%, 76%)",
+    "editor-property": "hsl(189, 71%, 73%)",
+    "editor-tag": "hsl(343, 81%, 75%)",
+    "editor-attribute": "hsl(41, 86%, 83%)",
+    "editor-operator": "hsl(189, 71%, 73%)",
+    "editor-bracket": "hsl(228, 24%, 72%)"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "Catppuccin Latte",
+  "author": "massCode",
+  "authorUrl": "https://github.com/massCodeIO",
+  "type": "light",
+  "colors": {
+    "primary": "hsl(266, 85%, 58%)",
+    "primary-foreground": "hsl(0, 0%, 100%)",
+    "background": "hsl(220, 23%, 95%)",
+    "foreground": "hsl(234, 16%, 35%)",
+    "accent": "hsl(223, 16%, 86%)",
+    "accent-hover": "hsl(223, 16%, 89%)",
+    "accent-foreground": "hsl(234, 16%, 35%)",
+    "muted": "hsl(220, 22%, 92%)",
+    "muted-foreground": "hsl(233, 12%, 48%)",
+    "card": "hsl(220, 22%, 92%)",
+    "popover": "hsl(220, 23%, 95%)",
+    "popover-foreground": "hsl(234, 16%, 35%)",
+    "border": "hsl(225, 14%, 83%)",
+    "scrollbar": "hsla(233, 12%, 48%, 0.35)"
+  },
+  "editorColors": {
+    "editor-keyword": "hsl(266, 85%, 58%)",
+    "editor-string": "hsl(109, 58%, 40%)",
+    "editor-comment": "hsl(231, 10%, 59%)",
+    "editor-number": "hsl(22, 99%, 52%)",
+    "editor-atom": "hsl(22, 99%, 52%)",
+    "editor-variable": "hsl(234, 16%, 35%)",
+    "editor-def": "hsl(220, 91%, 54%)",
+    "editor-property": "hsl(183, 74%, 35%)",
+    "editor-tag": "hsl(347, 87%, 44%)",
+    "editor-attribute": "hsl(35, 77%, 49%)",
+    "editor-operator": "hsl(197, 97%, 46%)",
+    "editor-bracket": "hsl(233, 12%, 48%)"
+  }
+}

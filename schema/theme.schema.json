@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/massCodeIO/masscode-themes/main/schema/theme.schema.json",
+  "title": "massCode Community Theme",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["name", "type", "colors"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Display name of the theme"
+    },
+    "author": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "Theme author name or handle"
+    },
+    "authorUrl": {
+      "type": "string",
+      "pattern": "^https://github\\.com/[A-Za-z0-9_.-]+(?:/[A-Za-z0-9_.-]+)?/?$",
+      "description": "GitHub profile or repository URL of the author"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["light", "dark"]
+    },
+    "colors": {
+      "type": "object",
+      "required": ["background", "foreground", "primary", "card", "border"],
+      "propertyNames": {
+        "pattern": "^[a-z0-9-]+$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 80
+      }
+    },
+    "editorColors": {
+      "type": "object",
+      "propertyNames": {
+        "pattern": "^editor-[a-z0-9-]+$"
+      },
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 3,
+        "maxLength": 80
+      }
+    }
+  }
+}
